@@ -1,0 +1,157 @@
+@charset "utf-8";
+@import "../node_modules/bulma/bulma.sass";
+@import "../node_modules/izitoast/dist/css/iziToast.css";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.scada {
+  padding: 1rem 1.5rem;
+}
+
+.dashboard {
+  width: 100%;
+}
+
+.topology-dashboard {
+  border: 2px solid #f3f3f3;
+}
+
+.devices-dashboard {
+  margin-left: 50px;
+  background-color: #f2f2f2;
+}
+
+span.scada-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.board-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.loading-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    margin-bottom: 1rem;
+  }
+}
+
+//loading infinito
+
+$pimary: #00d1b2;
+$text: #4a4a4a;
+$progress-bar-background-color: #dbdbdb;
+$dummy-invert: white;
+$colors: (
+  "primary": (
+    $primary,
+    $dummy-invert
+  ),
+  "link": (
+    #209cee,
+    $dummy-invert
+  ),
+  "info": (
+    #3273dc,
+    $dummy-invert
+  ),
+  "success": (
+    #23d160,
+    $dummy-invert
+  ),
+  "warning": (
+    #ffdd57,
+    $dummy-invert
+  ),
+  "danger": (
+    #ff3860,
+    $dummy-invert
+  )
+);
+
+.progress {
+  background: $progress-bar-background-color;
+
+  &::-webkit-progress-bar {
+    background: transparent !important; // override bulma.css
+  }
+
+  &:indeterminate {
+    animation: progress-indeterminate 1.8s linear infinite;
+    background: $progress-bar-background-color
+      linear-gradient(to right, $text 30%, $progress-bar-background-color 30%)
+      top left / 150% 150% no-repeat;
+
+    &::-moz-progress-bar {
+      background: transparent !important; // override bulma.css
+    }
+
+    @each $name, $pair in $colors {
+      $color: nth($pair, 1);
+      &.is-#{$name} {
+        background: $progress-bar-background-color
+          linear-gradient(
+            to right,
+            $color 30%,
+            $progress-bar-background-color 30%
+          )
+          top
+          left /
+          150%
+          150%
+          no-repeat;
+      }
+    }
+  }
+}
+
+@keyframes progress-indeterminate {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.provisioning {
+  display: flex;
+}
+
+.datapaths-group {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.provisioning-paragraph {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.provisioning-select {
+  max-width: 200px;
+}
